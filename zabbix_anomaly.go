@@ -118,15 +118,11 @@ func main() {
 		}
 	}
 
-	//fmt.Println(item_response)
-	//fmt.Println(host_name)
-	//fmt.Println(value_type)
 	// Get Zabbix History
 	response, _ := api.Call("history.get", zabbix.Params{"history": value_type, "itemids": itemid, "time_from": from_time, "time_till": now, "output": "extend"})
-	//cp := NewChangePoint(12, 0.0275, 6, 0.1, 12)
-	//cp := NewChangePoint(5, 0.02, 5, 0.02, 5)
+
 	cp := NewChangePoint(outlier_term, outlier_discount, score_term, score_discount, smooth_term)
-	//cp := NewChangePoint(7, 0.5, 28, 0.01, 7)
+
 	for _, history := range response.Result.([]interface{}) {
 		clock := history.(map[string]interface{})["clock"].(string)
 		value := history.(map[string]interface{})["value"].(string)
