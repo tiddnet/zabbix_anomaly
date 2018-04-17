@@ -30,23 +30,23 @@ for example:
 
     $ cp zabbix_anomaly-linux-amd64 /usr/lib/zabbix/externalscripts/zabbix_anomaly
 
-## 3. Register 2 items 
+## 3. Create two items 
 
 1. Score check item
 
-* Item name: any
+* Item name: <item name>
 * Type: External check
-* Key: zabbix_anomaly["-i","target item id","-user","Zabbix API username","-pass","Zabbix API user password","-interval","set check interval(seconds)"]
-* Update interval: any(This number should match zabbix_anomaly command -interval option number)
+* Key: zabbix_anomaly["-i","<target_item_id>","-user","<Zabbix_API_username>","-pass","<Zabbix_API_user_password","-interval","<interval_in_seconds>"]
+* Update interval: should match <interval_in_seconds>
 * Type of Information: Character
 
 Notes:
 If you change Zabbix trapper item key, zabbix_anomaly support -prefix parameter.
-(default: anomaly.<original item key>, -prefix "test" -> test.<original item key>)
+(default: anomaly.<original_item_key>, -prefix "test" -> test.<original_item_key>)
 
 2. Score register item
 
-* Item name: any
+* Item name: <item name>
 * Type: Zabbix trapper
 * Key: anomaly.<original item key> (e.g. anomaly.system.cpu.load[percpu,avg1])
 * Type of Information: Numeric(float)
